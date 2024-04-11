@@ -1,0 +1,29 @@
+#include "s21_map.h"
+
+using namespace s21;
+
+void Map::Node::PrintNode() {
+  std::cout << "key: " << this->data.first << " value: " << this->data.second
+            << " color: " << (this->Red ? "Red" : "Black") << "\n";
+  if (this->parent != nullptr) {
+    std::cout << "parent: " << this->parent->data.first;
+  } else {
+    std::cout << "parent: NULL";
+  }
+  if (this->left != nullptr) {
+    std::cout << ". left: " << this->left->data.first;
+  } else {
+    std::cout << ". left: NULL";
+  }
+  if (this->right != nullptr) {
+    std::cout << ". right: " << this->right->data.first << "\n\n";
+  } else {
+    std::cout << ". right: NULL\n\n";
+  }
+}
+
+bool Map::Node::IsParent() { return this == this->parent->left; }
+
+typename Map::Node **Map::Node::LeftOrRightSun(const bool left) {
+  return left ? &this->left : &this->right;
+}
